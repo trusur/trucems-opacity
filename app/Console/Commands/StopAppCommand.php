@@ -14,6 +14,7 @@ class StopAppCommand extends Command
     {
         Configuration::find(1)->update([
             'is_calibration' => 0,
+            'date_and_time' => date('Y-m-d H:i:s')
         ]);
     }
    
