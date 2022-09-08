@@ -1,6 +1,5 @@
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 import time
-import random
 import json
 import requests
 import logging

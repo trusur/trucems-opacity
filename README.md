@@ -8,6 +8,13 @@ cd trucems-opacity
 ```bash
 cp .env.example .env
 ```
+## Python Library Install
+```bash
+cd drivers
+```
+```bash
+pip3 install -r requirements.txt
+``
 ## Configuration
 Configuration database and change the app environtment
 APP_ENV=production
