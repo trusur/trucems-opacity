@@ -18,9 +18,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // StopAppCommand::class,
-        // DemoCommand::class,
-        // PlcRunCommand::class,
+        StopAppCommand::class,
     ];
 
     /**

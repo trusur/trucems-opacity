@@ -7,7 +7,6 @@ import datetime
 
 date = datetime.datetime.now()
 errorFile = "error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
-print(errorFile)
 logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
 baseUrl = "http://localhost/trucems-opacity/public/{}"
 portADC = 'COM3'
