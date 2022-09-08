@@ -1,9 +1,9 @@
-# TRUCEMS Lumen
+# TRUCEMS Opacity Reader
 ```bash
-git clone https://github.com/trusursidik12/trucems_lumen.git
+https://github.com/trusur/trucems-opacity.git
 ```
 ```bash
-cd trucems_lumen
+cd trucems-opacity
 ```
 ```bash
 cp .env.example .env
