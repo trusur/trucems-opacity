@@ -7,8 +7,8 @@ import datetime
 
 
 baseUrl = "http://localhost/trucems-opacity/public/{}"
-portADC = 'COM3'
-portDAC = 'COM4'
+portADC = '/dev/ttyADC'
+portDAC = '/dev/ttyDAC'
 
 def updateValue(sensorId, value):    
     try:
