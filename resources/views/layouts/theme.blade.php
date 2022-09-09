@@ -19,7 +19,10 @@
 <body>
     <div class="max-w-5xl mx-auto bg-gray-200 rounded min-h-[100vh] relative">
         @yield('content')
-        <div class="absolute bottom-0 w-full flex justify-end px-5 py-2">
+        <div class="absolute bottom-0 w-full flex justify-between px-5 py-2">
+            <div>
+                <img src="{{ url("horizontal-logo.png") }}" class="h-[7vh]" alt="Logo PT Trusur Unggul Teknusa - Environmental Tehcnology">
+            </div>
             <span class="text-gray-800">&copy; 2022 Developed by PT. Trusur Unggul Teknusa</span> 
         </div>
     </div>

@@ -22,7 +22,8 @@
                 </div>
                 <div id="section-values" class="px-3 py-2 flex flex-col space-y-2">
                     @foreach ($sensorValues as $value)
-                        <div class="bg-gray-400 h-[{{ $count == 1 ? 20 : ($count == 2 ? 12 : 7) }}rem] flex justify-between items-start"
+                        {{-- <div class="bg-gray-400 h-[{{ $count == 1 ? 50 : ($count == 2 ? 12 : 7) }}rem] flex justify-between items-start" --}}
+                        <div class="bg-gray-400 h-[36rem] flex justify-between items-start"
                             data-id="{{ $value->sensor_id }}">
                             <input type="hidden" name="sensor_id" class="sensor_id" value="{{ $value->sensor_id }}">
                             <div
@@ -30,18 +31,19 @@
                                 <span class="text-2xl font-bold sensor-name px-2">{!! $value->sensor->name !!}</span>
                             </div>
                             <div
-                                class="section-sensor-value transition duration-500 bg-gray-500 text-white flex flex-1 flex-col h-full justify-center items-center">
+                                class="section-sensor-value transition duration-500 bg-gray-500 text-white flex flex-1 flex-row h-full justify-center items-center">
                                 <span class="text-5xl font-bold sensor-value">
                                     <span>{{ $value->value }}</span>
                                 </span>
+                                <span class="text-2xl ml-3">%</span>
                             </div>
-                            <div
+                            {{-- <div
                                 class="section-sensor-unit transition duration-500 bg-gray-400 flex w-[5rem] flex-col h-full justify-between items-center">
                                 <span class="mt-3 text-xl sensor-unit">{{ $value->sensor->unit->name }}</span>
                                 <button data-id="{{ $value->sensor_id }}" data-isClicked="false"
                                     class="w-full btn-highlight px-2 py-3 text-sm bg-indigo-700 text-white">Highlight
                                     </buttond>
-                            </div>
+                            </div> --}}
                         </div>
                     @endforeach
                 </div>
