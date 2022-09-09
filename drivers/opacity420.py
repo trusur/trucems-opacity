@@ -5,9 +5,7 @@ import requests
 import logging
 import datetime
 
-date = datetime.datetime.now()
-errorFile = "error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
-logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
+
 baseUrl = "http://localhost/trucems-opacity/public/{}"
 portADC = 'COM3'
 portDAC = 'COM4'
@@ -21,6 +19,9 @@ def updateValue(sensorId, value):
         }, data=payload)
         return json.loads(response.text)
     except Exception as e:
+        date = datetime.datetime.now()
+        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
+        logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
         logging.error(e)
         return False
     
@@ -29,6 +30,9 @@ def getSensorValue(sensorId):
         response = requests.request("GET", baseUrl.format("/api/sensor-value/"+str(sensorId)))
         return json.loads(response.text)
     except Exception as e:
+        date = datetime.datetime.now()
+        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
+        logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
         logging.error(e)
         return False
     
@@ -41,6 +45,9 @@ def getAnalogInput():
             return read.registers[0]
         return -1
     except Exception as e:
+        date = datetime.datetime.now()
+        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
+        logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
         logging.error(e)
         return -1
 
@@ -63,6 +70,9 @@ def setAnalogOutput(outputIndex, value):
         
         return False
     except Exception as e:
+        date = datetime.datetime.now()
+        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
+        logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
         logging.error(e)    
         return False
 sensors = [1]
@@ -78,4 +88,7 @@ while True:
             time.sleep(1)
         time.sleep(1)
     except Exception as e:
+        date = datetime.datetime.now()
+        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/"+str(date.strftime("%d_%m_%y"))+'_errors.log'
+        logging.basicConfig(filename=errorFile, filemode='w', format='%(asctime)s - %(message)s')
         logging.error(e)
