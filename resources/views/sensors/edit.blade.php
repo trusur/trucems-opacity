@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ url('js/kioskboard/kioskboard-2.2.0.min.css') }}">
     <style>
         #KioskBoard-VirtualKeyboard {
-            height: 55vh;
+            height: 56vh;
         }
     </style>
 @endsection
@@ -85,7 +85,20 @@
     <script>
         $(document).ready(function() {
             KioskBoard.init({
-                keysArrayOfObjects: [{
+                keysArrayOfObjects: [
+                    {
+                        "0": "0",
+                        "1": "1",
+                        "2": "2",
+                        "3": "3",
+                        "4": "4",
+                        "5": "5",
+                        "6": "6",
+                        "7": "7",
+                        "8": "8",
+                        "9": "9"
+                    },
+                    {
                         "0": "Q",
                         "1": "W",
                         "2": "E",
