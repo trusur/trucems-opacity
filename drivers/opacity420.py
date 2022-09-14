@@ -53,13 +53,15 @@ def getAnalogInput():
         return -1
 
 def setAnalogOutput(outputIndex, value):
+    outputIndex = int(outputIndex)
     if(value > 4000 and value < 20000):
         value = value
     elif value < 4000:
         value = 4000
     elif value > 20000:
         value = 20000
-    value = int(value)
+    if(type(value) != "int"):
+        value = int(value)
     try:
         client = ModbusClient(method = 'rtu',port=portDAC,baudrate=9600,parity = 'N',timeout=3)
         connection = client.connect()
