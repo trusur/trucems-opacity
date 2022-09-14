@@ -17,7 +17,7 @@ class SensorsController extends Controller
     }
     public function getById($sensorId)
     {
-        $values = SensorValue::with('sensor:id,code,analog_formula,read_formula')->where('sensor_id', $sensorId)->first();
+        $values = SensorValue::with('sensor:id,code,analog_formula,read_formula,write_address')->where('sensor_id', $sensorId)->first();
         return response()->json($values);
     }
     public function getNOx()

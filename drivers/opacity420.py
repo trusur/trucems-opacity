@@ -4,6 +4,7 @@ import json
 import requests
 import logging
 import datetime
+import sys
 
 
 baseUrl = "http://localhost/trucems-opacity/public/{}"
@@ -81,10 +82,10 @@ while True:
         for sensorId in sensors:
             sensor = getSensorValue(sensorId)
             value = getAnalogInput()
+            writeAddress = sensor['sensor']['write_address']
             concentrate = -1 if value == -1 else eval(sensor['sensor']['read_formula'])
             time.sleep(1)
-            updateValue(sensorId,concentrate)
-            # setAnalogOutput(0,value)
+            setAnalogOutput(writeAddress,value)
             time.sleep(1)
         time.sleep(1)
     except Exception as e:
