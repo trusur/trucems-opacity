@@ -60,7 +60,6 @@ def setAnalogOutput(outputIndex, value):
     elif value > 20000:
         value = 20000
     value = int(value)
-    print(value)
     try:
         client = ModbusClient(method = 'rtu',port=portDAC,baudrate=9600,parity = 'N',timeout=3)
         connection = client.connect()
@@ -84,6 +83,7 @@ while True:
             value = getAnalogInput()
             writeAddress = sensor['sensor']['write_address']
             concentrate = -1 if value == -1 else eval(sensor['sensor']['read_formula'])
+            updateValue(sensor['sensor']['id'], concentrate)
             time.sleep(1)
             setAnalogOutput(writeAddress,value)
             time.sleep(1)

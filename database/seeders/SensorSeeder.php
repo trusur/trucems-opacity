@@ -24,7 +24,7 @@ class SensorSeeder extends Seeder
                 'code' => 'opacity',
                 'name' => 'Opacity',
                 'read_formula' => 'round((0.00625 * value) - 25, 3)',
-                'write_address' => '1', //ch3
+                'write_address' => '0', //ch3
             ],
         ]);
         SensorValue::insert([
