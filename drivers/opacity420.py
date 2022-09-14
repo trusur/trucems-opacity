@@ -83,6 +83,7 @@ while True:
             value = getAnalogInput()
             writeAddress = sensor['sensor']['write_address']
             concentrate = -1 if value == -1 else eval(sensor['sensor']['read_formula'])
+            concentrate = 100 if concentrate > 100 else concentrate
             updateValue(sensor['sensor']['id'], concentrate)
             time.sleep(1)
             setAnalogOutput(writeAddress,value)
