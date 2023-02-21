@@ -19,10 +19,17 @@ $router->get('/', 'DashboardController@index');
 $router->get('/quality-standards', 'DashboardController@qualityStandard');
 $router->get('/configurations', 'ConfigurationController@index');
 $router->patch('/configurations', 'ConfigurationController@update');
+// Sensors CRUD
 $router->get('/sensors', 'SensorController@index');
 $router->group(['prefix' => 'sensor'], function () use ($router) {
     $router->get('/edit/{sensorId}', 'SensorController@edit');
     $router->patch('/update/{sensorId}', 'SensorController@update');
+});
+// Constant CRUD
+$router->get('/constants', 'ConstantController@index');
+$router->group(['prefix' => 'constant'], function () use ($router) {
+    $router->get('/edit/{constantId}', 'ConstantController@edit');
+    $router->patch('/update/{constantId}', 'ConstantController@update');
 });
 
 /**
