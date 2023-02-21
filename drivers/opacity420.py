@@ -7,8 +7,8 @@ import datetime
 import sys
 
 baseUrl = "http://localhost/trucems-opacity/public/{}"
-# portADC = '/dev/ttyADC'
-portADC = 'COM5'
+portADC = '/dev/ttyADC'
+# portADC = 'COM5'
 portDAC = '/dev/ttyDAC'
 
 def linear_map(value, leftMin, leftMax, rightMin, rightMax):
