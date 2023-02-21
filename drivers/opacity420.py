@@ -6,11 +6,26 @@ import logging
 import datetime
 import sys
 
-
 baseUrl = "http://localhost/trucems-opacity/public/{}"
-portADC = '/dev/ttyADC'
+# portADC = '/dev/ttyADC'
+portADC = 'COM5'
 portDAC = '/dev/ttyDAC'
 
+def linear_map(value, leftMin, leftMax, rightMin, rightMax):
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
+    valueScaled = float(value - leftMin) / float(leftSpan)
+    return rightMin + (valueScaled * rightSpan)
+
+def get_opacity(value):
+    try:
+        url = baseUrl.format("/api/getOpacityBy420Concentration/" + str(value))
+        response = requests.request("GET", url, headers={
+            'Content-Type': 'application/x-www-form-urlencoded'
+        })
+        return json.loads(response.text)
+    except Exception as e:
+        return False
 
 def updateValue(sensorId, value):
     try:
@@ -35,11 +50,11 @@ def getSensorValue(sensorId):
         return json.loads(response.text)
     except Exception as e:
         date = datetime.datetime.now()
-        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
-            str(date.strftime("%d_%m_%y"))+'_errors.log'
-        logging.basicConfig(filename=errorFile, filemode='w',
-                            format='%(asctime)s - %(message)s')
-        logging.error(e)
+        # errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
+        #     str(date.strftime("%d_%m_%y"))+'_errors.log'
+        # logging.basicConfig(filename=errorFile, filemode='w',
+        #                     format='%(asctime)s - %(message)s')
+        # logging.error(e)
         return False
 
 
@@ -48,17 +63,17 @@ def getAnalogInput():
         clientInput = ModbusClient(
             method='rtu', port=portADC, baudrate=9600, parity='N', timeout=3)
         if(clientInput.connect()):
-            read = clientInput.read_holding_registers(0, 8, unit=1)
+            read = clientInput.read_holding_registers(0, 1, unit=1)
             clientInput.close()
             return read.registers[0]
         return -1
     except Exception as e:
         date = datetime.datetime.now()
-        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
-            str(date.strftime("%d_%m_%y"))+'_errors.log'
-        logging.basicConfig(filename=errorFile, filemode='w',
-                            format='%(asctime)s - %(message)s')
-        logging.error(e)
+        # errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
+        #     str(date.strftime("%d_%m_%y"))+'_errors.log'
+        # logging.basicConfig(filename=errorFile, filemode='w',
+        #                     format='%(asctime)s - %(message)s')
+        # logging.error(e)
         return -1
 
 
@@ -85,11 +100,11 @@ def setAnalogOutput(outputIndex, value):
         return False
     except Exception as e:
         date = datetime.datetime.now()
-        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
-            str(date.strftime("%d_%m_%y"))+'_errors.log'
-        logging.basicConfig(filename=errorFile, filemode='w',
-                            format='%(asctime)s - %(message)s')
-        logging.error(e)
+        # errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
+        #     str(date.strftime("%d_%m_%y"))+'_errors.log'
+        # logging.basicConfig(filename=errorFile, filemode='w',
+        #                     format='%(asctime)s - %(message)s')
+        # logging.error(e)
         return False
 
 
@@ -100,18 +115,20 @@ while True:
             sensor = getSensorValue(sensorId)
             value = getAnalogInput()
             writeAddress = sensor['sensor']['write_address']
-            concentrate = -1 if value == - \
-                1 else eval(sensor['sensor']['read_formula'])
-            concentrate = 100 if concentrate > 100 else concentrate
-            updateValue(sensor['sensor']['id'], concentrate)
+
+            concentrate = get_opacity(value)["opacity"];
+            updateValue(sensor['sensor']['id'], round(concentrate,2))
+            concentrate420 = int(round(linear_map(concentrate,0,100,4000,20000),0))
+            # print(concentrate)
+            # print(concentrate420)
             time.sleep(1)
-            setAnalogOutput(writeAddress, value)
+            setAnalogOutput(writeAddress, concentrate420)
             time.sleep(1)
         time.sleep(1)
     except Exception as e:
         date = datetime.datetime.now()
-        errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
-            str(date.strftime("%d_%m_%y"))+'_errors.log'
-        logging.basicConfig(filename=errorFile, filemode='w',
-                            format='%(asctime)s - %(message)s')
-        logging.error(e)
+        # errorFile = "/var/www/html/trucems-opacity/drivers/error_logs/" + \
+        #     str(date.strftime("%d_%m_%y"))+'_errors.log'
+        # logging.basicConfig(filename=errorFile, filemode='w',
+        #                     format='%(asctime)s - %(message)s')
+        # logging.error(e)

@@ -36,11 +36,14 @@ $router->group(['prefix' => 'constant'], function () use ($router) {
  * API
  */
 $router->group(['prefix' => 'api'], function () use ($router) {
-     /**
+    /**
      * Sensor Value Logs
      */
     $router->patch('/sensor-value/{sensorId}', 'API\ValueLogsController@update');
+    $router->get('/getOpacityBy420Concentration/{concentration420}', 'API\ValueLogsController@getOpacityBy420Concentration');
     $router->get('/sensor-value-logs', 'API\ValueLogsController@index');
+
+    $router->get('/constants', 'API\Constants@index');
 
     /**
      * List Sensors
