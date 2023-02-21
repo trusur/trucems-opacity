@@ -1,5 +1,5 @@
 @extends('layouts.theme')
-@section('title', 'Configuration')
+@section('title', 'Constant')
 @section('css')
     <link rel="stylesheet" href="{{ url('js/kioskboard/kioskboard-2.2.0.min.css') }}">
     <link rel="stylesheet" href="{{ url('sweetalert2/sweetalert2.min.css') }}">
