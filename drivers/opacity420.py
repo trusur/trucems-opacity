@@ -93,7 +93,7 @@ def setAnalogOutput(outputIndex, value):
         connection = client.connect()
         if(connection):
             write = client.write_register(outputIndex, value, unit=1)
-            print(write)
+            # print(write)
             client.close()
             return True
 
