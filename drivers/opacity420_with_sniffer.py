@@ -104,7 +104,7 @@ sensors = [1]
 while True:
     try:
         for sensorId in sensors:
-            with serial.Serial('portADC', 9600, timeout=10) as ser:
+            with serial.Serial(portADC, 9600, timeout=10) as ser:
                 responses = wrap(ser.read_until(b'\r').hex(), 2)
                 if(len(responses) == 18):
                     try:
