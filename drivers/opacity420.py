@@ -7,8 +7,8 @@ import datetime
 import sys
 
 baseUrl = "http://localhost/trucems-opacity/public/{}"
-# portADC = '/dev/ttyADC'
-portADC = 'COM5'
+portADC = '/dev/ttyADC'
+# portADC = 'COM5'
 portDAC = '/dev/ttyDAC'
 
 def linear_map(value, leftMin, leftMax, rightMin, rightMax):
@@ -93,7 +93,7 @@ def setAnalogOutput(outputIndex, value):
         connection = client.connect()
         if(connection):
             write = client.write_register(outputIndex, value, unit=1)
-            print(write)
+            # print(write)
             client.close()
             return True
 
