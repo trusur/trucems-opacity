@@ -41,6 +41,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
      */
     $router->patch('/sensor-value/{sensorId}', 'API\ValueLogsController@update');
     $router->get('/getOpacityBy420Concentration/{concentration420}', 'API\ValueLogsController@getOpacityBy420Concentration');
+    $router->get('/getPCLD', 'API\ValueLogsController@getPCLD');
     $router->get('/sensor-value-logs', 'API\ValueLogsController@index');
 
     $router->get('/constants', 'API\Constants@index');

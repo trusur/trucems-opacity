@@ -64,4 +64,10 @@ class ValueLogsController extends Controller
         $opacity = 100 - $T;
         return response()->json(["opacity" => $opacity]);
     }
+
+    public function getPCLD(Request $request)
+    {
+        $PCLD = Constant::where(["name" => "PCLD"])->get()[0]["constant"] * 1;
+        return response()->json(["PCLD" => $PCLD]);
+    }
 }
